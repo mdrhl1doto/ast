@@ -467,7 +467,7 @@
                 ctx.fillStyle = '#fff';
                 ctx.fillText(`Score: ${score}`, 20, 30);
                 ctx.fillText(`Level: ${level}`, 20, 60);
-                ctx.fillText(`High Score: ${highScore}`, canvas.width - 150, 30);
+                ctx.fillText(`High Score: ${highScore}`, canvas.width - (highScore > 999 ? 200 : 150), 30);
 
                 // Draw power-up indicators
                 if (shield) {
