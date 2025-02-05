@@ -313,6 +313,34 @@
                 setTimeout(() => canShoot = true, 250);
             }
         });
+        
+        // Touch controls
+
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const canvasRect = canvas.getBoundingClientRect();
+            const touchX = touch.clientX - canvasRect.left;
+
+            if( gameState === 'start' || gameState === 'gameOver'){
+                startScreen.click();
+            }else if (gameState === 'playing'){
+                if (touchX < canvas.width / 2){
+                    ship.left = true;
+                    ship.right = false;
+                } else {
+                    ship.right = true;
+                    ship.left = false;
+                }
+
+                // Shooting on touch
+                if (canShoot) {
+                    bullets.push(new Bullet(ship.x + ship.width / 2 - 2, ship.y));
+                    canShoot = false;
+                    setTimeout(() => canShoot = true, 250);
+                }
+            }
+        });
 
         // Start game on click
         startScreen.addEventListener('click', () => {
