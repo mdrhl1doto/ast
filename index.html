@@ -162,10 +162,7 @@
             }
 
             draw() {
-                // Draw particles
-                this.particles.forEach(particle => particle.draw());
-
-                // Draw ship
+                // Main Body
                 ctx.fillStyle = '#39ff14';
                 ctx.beginPath();
                 ctx.moveTo(this.x + this.width / 2, this.y);
@@ -174,12 +171,23 @@
                 ctx.closePath();
                 ctx.fill();
 
-                // Draw shield if active
-                if (shield) {
+                // Engine Flames
+                ctx.fillStyle = 'rgba(57, 255, 20, 0.5)';
+                ctx.beginPath();
+                ctx.moveTo(this.x + this.width / 2, this.y + this.height);
+                ctx.lineTo(this.x + this.width + 10, this.y + this.height + 20);
+                ctx.lineTo(this.x - 10, this.y + this.height + 20);
+                ctx.closePath();
+                ctx.fill();
+
+                // Draw engine particles
+                this.particles.forEach(particle => particle.draw());
+
+                //Draw shield effect
+                if(shield){
                     ctx.strokeStyle = '#00ffff';
                     ctx.beginPath();
-                    ctx.arc(this.x + this.width / 2, this.y + this.height / 2, 
-                           this.width, 0, Math.PI * 2);
+                    ctx.arc(this.x + this.width / 2, this.y + this.height / 2, this.width, 0, Math.PI * 2);
                     ctx.stroke();
                 }
             }
